@@ -3,8 +3,8 @@ import TitanCore
 /// Allow this app to be accessed with total violation of Same Origin Policy.
 /// This adds the `AllowAllOrigins` and `RespondToPreflightAllowingAllMethods` functions.
 public func addInsecureCORSSupport(_ titan: Titan) {
-  titan.addFunction(AllowAllOrigins)
   titan.addFunction(RespondToPreflightAllowingAllMethods)
+  titan.addFunction(AllowAllOrigins)
 }
 
 /// A header that allows all origins. You probably want to use the `AllowAllOrigins` Function instead
