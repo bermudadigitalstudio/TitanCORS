@@ -6,7 +6,7 @@ Helper functions to add CORS support to Titan apps.
 
 ```swift
 let titanInstance = Titan()
-TitanCORS.addCORSSupport(titanInstance)
+TitanCORS.addInsecureCORSSupport(titanInstance)
 ```
 
 ## I know what CORS is and I don't care about security but I'm not letting you mess with my Titan instance
