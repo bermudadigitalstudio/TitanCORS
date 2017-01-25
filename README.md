@@ -9,9 +9,9 @@ let titanInstance = Titan()
 TitanCORS.addCORSSupport(titanInstance)
 ```
 
-## I know what CORS is and I'm not letting you mess with my app
+## I know what CORS is and I don't care about security but I'm not letting you mess with my Titan instance
 
-Okay.
+Good stuff.
 
 ```swift
 titanInstance.addFunction(AllowAllOrigins) // Add wildcard origin header to all responses
