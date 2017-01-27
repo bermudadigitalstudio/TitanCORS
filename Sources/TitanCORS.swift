@@ -14,12 +14,12 @@ public let AllowAllOriginsHeader: Header = ("access-control-allow-origin", "*")
 public let AllowAllOrigins: Function = { req, res in
   var respHeaders = res.headers
   guard (respHeaders.contains { header in
-    return header.0.lowercased() == "access-control-allow-origin"
-    } != true) else {
+    return header.name.lowercased() == "access-control-allow-origin"
+  } != true) else {
       return (req, res)
   }
   respHeaders.append(AllowAllOriginsHeader)
-  return (req, Response(res.code, res.body, headers: respHeaders))
+  return (req, Response(code: res.code, body: res.body, headers: respHeaders))
 }
 
 /// Respond to a CORS preflight request, allowing all methods requested in the preflight.
@@ -27,23 +27,23 @@ public let RespondToPreflightAllowingAllMethods: Function = { req, res in
   guard req.method.uppercased() == "OPTIONS" else {
     return (req, res)
   }
-  guard let requestedMethods = (req.headers.first(where: { (key, _) -> Bool in
-    return key.lowercased() == "access-control-request-method"
+  guard let requestedMethods = (req.headers.first(where: { (name, _) -> Bool in
+    return name.lowercased() == "access-control-request-method"
   }).map { (header: Header) -> String in
-    return header.1
+    return header.value
   }) else {
     return (req, res)
   }
   var headers: [Header] = []
   headers.append(("access-control-allow-methods", requestedMethods))
-  if let requestedHeaders = (req.headers.first(where: { (key, _) -> Bool in
-    return key.lowercased() == "access-control-request-headers"
+  if let requestedHeaders = (req.headers.first(where: { (name, _) -> Bool in
+    return name.lowercased() == "access-control-request-headers"
   }).map { (header: Header) -> String in
-    return header.1
+    return header.value
   }) {
     headers.append(("access-control-allow-headers", requestedHeaders))
   } else {
     headers.append(("access-control-allow-headers", "*"))
   }
-  return (req, Response(200, "", headers: headers))
+  return (req, Response(code: 200, body: "", headers: headers))
 }
