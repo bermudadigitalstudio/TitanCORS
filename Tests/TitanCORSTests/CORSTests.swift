@@ -11,13 +11,13 @@ final class CORSTests: XCTestCase {
     titanInstance = nil
   }
   func testCanAddCorsFunctionToTitan() {
-    titanInstance.addFunction(RespondToPreflightAllowingAllMethods)
-    titanInstance.addFunction(AllowAllOrigins)
+    titanInstance.addFunction(respondToPreflightAllowingAllMethods)
+    titanInstance.addFunction(allowAllOrigins)
     TitanCORS.addInsecureCORSSupport(titanInstance)
   }
 
   func testTitanCanRespondToPreflight() {
-    titanInstance.addFunction(RespondToPreflightAllowingAllMethods)
+    titanInstance.addFunction(respondToPreflightAllowingAllMethods)
 
     let res = titanInstance.app(request: Request(method: "OPTIONS",
                                                  path: "/onuhoenth",
@@ -34,7 +34,7 @@ final class CORSTests: XCTestCase {
   }
 
   func testTitanCanAllowAllOrigins() {
-    titanInstance.addFunction(AllowAllOrigins)
+    titanInstance.addFunction(allowAllOrigins)
     let res = titanInstance.app(request: Request(method: "ANYMETHOD",
                                                  path: "NOT EVEN A REAL PATH",
                                                  body: "WOWOIE", headers: []))

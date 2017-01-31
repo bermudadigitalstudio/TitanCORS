@@ -14,8 +14,8 @@ TitanCORS.addInsecureCORSSupport(titanInstance)
 Good stuff.
 
 ```swift
-titanInstance.addFunction(AllowAllOrigins) // Add wildcard origin header to all responses
-titanInstance.addFunction(RespondToPreflightAllowingAllMethods) // Respond to a CORS preflight option request allowing all methods requested
+titanInstance.addFunction(allowAllOrigins) // Add wildcard origin header to all responses
+titanInstance.addFunction(respondToPreflightAllowingAllMethods) // Respond to a CORS preflight option request allowing all methods requested
 ```
 
 ## I know what CORS is and I want to customize it
