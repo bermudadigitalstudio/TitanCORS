@@ -2,7 +2,6 @@ import TitanCORS
 import TitanCore
 import XCTest
 
-
 final class CORSTests: XCTestCase {
   var titanInstance: Titan!
   override func setUp() {
@@ -20,7 +19,10 @@ final class CORSTests: XCTestCase {
   func testTitanCanRespondToPreflight() {
     titanInstance.addFunction(RespondToPreflightAllowingAllMethods)
 
-    let res = titanInstance.app(request: Request(method: "OPTIONS", path: "/onuhoenth", body: "", headers: [
+    let res = titanInstance.app(request: Request(method: "OPTIONS",
+                                                 path: "/onuhoenth",
+                                                 body: "",
+                                                 headers: [
       ("Access-Control-Request-Method", "POST"),
       ("Access-Control-Request-Headers", "X-Custom-Header")
     ]))
@@ -33,7 +35,9 @@ final class CORSTests: XCTestCase {
 
   func testTitanCanAllowAllOrigins() {
     titanInstance.addFunction(AllowAllOrigins)
-    let res = titanInstance.app(request: Request(method: "ANYMETHOD", path: "NOT EVEN A REAL PATH", body: "WOWOIE", headers: []))
+    let res = titanInstance.app(request: Request(method: "ANYMETHOD",
+                                                 path: "NOT EVEN A REAL PATH",
+                                                 body: "WOWOIE", headers: []))
     XCTAssertEqual(res.retrieveHeaderByName("access-control-allow-origin").value, "*")
   }
 }
